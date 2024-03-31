@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product List</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+
+<body>
+    <button id="loadData">Load Data</button>
+    <div id="productList"></div>
+
+    <script>
+        $(document).ready(function () {
+            $('#loadData').click(function () {
+                $.get("https://dummyjson.com/products", function (data) {
+                    displayProducts(data.products);
+                });
+            });
+        });
+
+        function displayProducts(products) {
+            var productList = $('#productList');
+            products.forEach(function (product) {
+                var productDiv = $('<div class="product"></div>');
+
+                productDiv.append('<h3>' + product.title + '</h3>');
+                productDiv.append('<p>Price: $' + product.price + '</p>');
+                productDiv.append('<p>Brand: ' + product.brand + '</p>');
+                productDiv.append('<p>Category: ' + product.category + '</p>');
+                productDiv.append('<img src="' + product.thumbnail + '" alt="' + product.title + '">');
+
+                productList.append(productDiv);
+            });
+        }
+
+
+    </script>
+</body>
+
+</html>
